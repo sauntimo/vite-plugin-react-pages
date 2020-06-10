@@ -2237,19 +2237,19 @@ const PageLoader = ({ pages, path }) => {
 
 const pages = {};
 pages["/"] = {
-              _importFn: () => import('./__rootIndex__.ea2b0544.js'),
+              _importFn: () => import('./__rootIndex__.4abe7c1b.js'),
               staticData: {"sort":0,"sourceType":"md"},
           };
 pages["/page-data"] = {
-              _importFn: () => import('./page-data.00934be4.js'),
+              _importFn: () => import('./page-data.b9cae807.js'),
               staticData: {"sort":3,"sourceType":"md"},
           };
 pages["/pages"] = {
-              _importFn: () => import('./pages.f16e8b79.js'),
+              _importFn: () => import('./pages.7b3d8f69.js'),
               staticData: {"sort":1,"sourceType":"md"},
           };
 pages["/theme"] = {
-              _importFn: () => import('./theme.f01fe83d.js'),
+              _importFn: () => import('./theme.9fa7fda8.js'),
               staticData: {"sort":2,"sourceType":"md"},
           };
 
@@ -2272,7 +2272,7 @@ function getRouteFromPagesData(pages) {
 }
 
 ReactDOM.render(React.createElement(React.StrictMode, null,
-    React.createElement(BrowserRouter, null,
+    React.createElement(BrowserRouter, { basename: "/vite-plugin-react-pages/" },
         React.createElement(App, null))), document.getElementById('root'));
 
 export { Link as L, React as R };
