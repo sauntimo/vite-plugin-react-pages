@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.23d5f845.css">
 </head>
 <body>
-  <div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">Github ⭐</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/">/</a></li><li><a href="/pages">/pages</a></li><li><a href="/theme">/theme</a></li><li><a href="/page-data">/page-data</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Theme customization</h1><p>Vite pages provides only one theme API: <code>_render.tsx</code>.
+  <div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">Github ⭐</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/vite-plugin-react-pages/">/</a></li><li><a href="/vite-plugin-react-pages/pages">/pages</a></li><li><a href="/vite-plugin-react-pages/theme">/theme</a></li><li><a href="/vite-plugin-react-pages/page-data">/page-data</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Theme customization</h1><p>Vite pages provides only one theme API: <code>_render.tsx</code>.
 <code>_render.tsx</code> should export a <strong>render function</strong>: <code>(pageData: any, pages: IPages) =&gt; React.ReactElement</code>. For example:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
 import Layout from &#x27;../Layout&#x27;
 import type { IRenderPage } from &#x27;vite-plugin-react-pages/client&#x27;
@@ -16,7 +16,7 @@ const render: IRenderPage = (pageData, pages) =&gt; {
   return &lt;Layout Content={PageComponent} pages={pages} /&gt;
 }
 export default render
-</code></pre><p>We will explain the parameters of the render function in <a href="/page-data">page-data doc</a>.</p><blockquote><p>The render function should be pure.</p></blockquote><p>You can implement your theme in the Layout component. You can also import a render function from a npm package.</p><h2>Nearest theme config wins</h2><p>You can have multiple <code>_render.tsx</code> in the pages directory. For each page file. It will find-up the nearest <code>_render.tsx</code>. And use it to render the page layout.</p><h2>Suggestion: use higher order function to config theme</h2><p>You can export your theme as a higher order function to make it more configurable.</p><p>For example, theme provider export theme as this function:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
+</code></pre><p>We will explain the parameters of the render function in <a href="/vite-plugin-react-pages/page-data">page-data doc</a>.</p><blockquote><p>The render function should be pure.</p></blockquote><p>You can implement your theme in the Layout component. You can also import a render function from a npm package.</p><h2>Nearest theme config wins</h2><p>You can have multiple <code>_render.tsx</code> in the pages directory. For each page file. It will find-up the nearest <code>_render.tsx</code>. And use it to render the page layout.</p><h2>Suggestion: use higher order function to config theme</h2><p>You can export your theme as a higher order function to make it more configurable.</p><p>For example, theme provider export theme as this function:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
 import Layout from &#x27;../Layout&#x27;
 import type { IRenderPage } from &#x27;vite-plugin-react-pages/client&#x27;
 
@@ -40,6 +40,6 @@ export const createTheme = (sideMenuData): IRenderPage =&gt; {
 ])
 </code></pre><p>We encourage theme providers to export config function like this <code>createTheme</code>, to make theme easier to use.</p><h2>Caveat</h2><p>React will re-mount the component if the vdom tree hierarchy changes (.e.g <code>&lt;Layout /&gt;</code> -&gt; <code>&lt;div&gt;&lt;Layout /&gt;&lt;/div&gt;</code>). If you want to retain the Layout component (so that the SideMenu scroll state won&#x27;t get reset), you should render the Layout component in the &quot;same position&quot;.</p><p>The props of Layout component can change as you like. You can use that to make Layout component behave differently.</p></div></div></div></div>
   
-<script type="module" src="/vite-plugin-react-pages/_assets/client.77dcd073.js"></script>
+<script type="module" src="/vite-plugin-react-pages/_assets/client.a1801500.js"></script>
 </body>
 </html>

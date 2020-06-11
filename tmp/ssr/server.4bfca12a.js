@@ -744,7 +744,7 @@ const PageLoader = ({ pages, path }) => {
 
 const pages$1 = {};
 pages$1["/"] = {
-             _importFn: () => Promise.resolve().then(function () { return require('./__rootIndex__.2fa1076a.js'); }),
+             _importFn: () => Promise.resolve().then(function () { return require('./__rootIndex__.bb4ade3f.js'); }),
              staticData: {"sort":0,"sourceType":"md"},
          };
 pages$1["/page-data"] = {
@@ -779,8 +779,9 @@ function getRouteFromPagesData(pages) {
 }
 
 function renderToString(url) {
+    var _a;
     return ReactDOM.renderToString(React__default.createElement(React__default.StrictMode, null,
-        React__default.createElement(reactRouterDom.StaticRouter, { location: url },
+        React__default.createElement(reactRouterDom.StaticRouter, { basename: (_a = "/vite-plugin-react-pages/") === null || _a === void 0 ? void 0 : _a.replace(/\/$/, ''), location: url },
             React__default.createElement(ssrDataCtx.Provider, { value: ssrData },
                 React__default.createElement(App, null)))));
 }

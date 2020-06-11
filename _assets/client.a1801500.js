@@ -2257,19 +2257,19 @@ const PageLoader = ({ pages, path }) => {
 
 const pages = {};
 pages["/"] = {
-             _importFn: () => import('./__rootIndex__.83cdefd9.js'),
+             _importFn: () => import('./__rootIndex__.964e3901.js'),
              staticData: {"sort":0,"sourceType":"md"},
          };
 pages["/page-data"] = {
-             _importFn: () => import('./page-data.6dec18d7.js'),
+             _importFn: () => import('./page-data.9ee6f01d.js'),
              staticData: {"sort":3,"sourceType":"md"},
          };
 pages["/pages"] = {
-             _importFn: () => import('./pages.3283ccf8.js'),
+             _importFn: () => import('./pages.3914b8f9.js'),
              staticData: {"sort":1,"sourceType":"md"},
          };
 pages["/theme"] = {
-             _importFn: () => import('./theme.f4f13473.js'),
+             _importFn: () => import('./theme.63e0ade8.js'),
              staticData: {"sort":2,"sourceType":"md"},
          };
 
@@ -2291,8 +2291,9 @@ function getRouteFromPagesData(pages) {
     });
 }
 
+var _a;
 ReactDOM.hydrate(React.createElement(React.StrictMode, null,
-    React.createElement(BrowserRouter, { basename: "/vite-plugin-react-pages/" },
+    React.createElement(BrowserRouter, { basename: (_a = "/vite-plugin-react-pages/") === null || _a === void 0 ? void 0 : _a.replace(/\/$/, '') },
         React.createElement(App, null))), document.getElementById('root'));
 
 export { Link as L, React as R };
