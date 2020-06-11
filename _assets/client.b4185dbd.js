@@ -2257,19 +2257,19 @@ const PageLoader = ({ pages, path }) => {
 
 const pages = {};
 pages["/"] = {
-             _importFn: () => import('./__rootIndex__.97a06252.js'),
+             _importFn: () => import('./__rootIndex__.882457af.js'),
              staticData: {"sort":0,"sourceType":"md"},
          };
 pages["/page-data"] = {
-             _importFn: () => import('./page-data.6d6b4c88.js'),
+             _importFn: () => import('./page-data.430357b0.js'),
              staticData: {"sort":3,"sourceType":"md"},
          };
 pages["/pages"] = {
-             _importFn: () => import('./pages.325c25e1.js'),
+             _importFn: () => import('./pages.50f6b33b.js'),
              staticData: {"sort":1,"sourceType":"md"},
          };
 pages["/theme"] = {
-             _importFn: () => import('./theme.955f1bf6.js'),
+             _importFn: () => import('./theme.3c9a72bc.js'),
              staticData: {"sort":2,"sourceType":"md"},
          };
 

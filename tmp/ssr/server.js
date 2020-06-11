@@ -294,7 +294,9 @@ function MDXContent({components, ...props}) {
     parentName: "li"
   }, `only one theme API`), `, you can customize anything on the page. It is easy to write a theme that is sharable and configurable. If you use typescript, your theme configuration will get type-check and intelliSense.`), createElement("li", {
     parentName: "ul"
-  }, `Automatic code splitting based on pages. Readers don't need to download the whole app, they only load page data as needed.`)), createElement("h2", null, `Getting stated`), createElement("ol", null, createElement("li", {
+  }, `Automatic code splitting based on pages. Readers don't need to download the whole app, they only load page data as needed.`), createElement("li", {
+    parentName: "ul"
+  }, `Support SSR out of the box. Get even better user experience.`)), createElement("h2", null, `Getting stated`), createElement("ol", null, createElement("li", {
     parentName: "ol"
   }, `clone `, createElement("a", {
     parentName: "li",
@@ -315,7 +317,13 @@ function MDXContent({components, ...props}) {
     parentName: "li"
   }, `npm run build`), ` and serve the `, createElement("inlineCode", {
     parentName: "li"
-  }, `dist`), `.`)));
+  }, `dist`), `.`), createElement("li", {
+    parentName: "ol"
+  }, createElement("inlineCode", {
+    parentName: "li"
+  }, `npm run ssr`), ` and serve the `, createElement("inlineCode", {
+    parentName: "li"
+  }, `dist`), `. You can disable javascript in your browser, to verify if it can still render.`)));
 }
 MDXContent.isMDXComponent = true;
 
