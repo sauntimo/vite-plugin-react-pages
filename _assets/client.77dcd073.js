@@ -2196,11 +2196,32 @@ var NavLink = forwardRef$1$1(function (_ref, forwardedRef) {
   });
 });
 
+/**
+ * dynamic import don't work in ssr
+ * to work around that, in ssr, we pass all the data needed by App
+ * with this ctx
+ * so the App can render the page data directly
+ * instead of render the loading state
+ */
+const ssrDataCtx = createContext(undefined);
+
 const PageLoader = ({ pages, path }) => {
+    var _a, _b;
     const { staticData: pageStaticData, _importFn } = pages[path];
-    const [loadState, setLoadState] = useState(() => ({
-        type: 'loading',
-    }));
+    const ssrData = useContext(ssrDataCtx);
+    const [loadState, setLoadState] = useState(() => {
+        if (ssrData) {
+            // we already have the data in ssr
+            // don't need to dynamic load it
+            return {
+                type: 'loaded',
+                pageLoaded: ssrData.pages[path],
+            };
+        }
+        return {
+            type: 'loading',
+        };
+    });
     useEffect(() => {
         _importFn()
             .then((pageLoaded) => {
@@ -2223,8 +2244,7 @@ const PageLoader = ({ pages, path }) => {
     }
     if (loadState.type === 'error') {
         return React.createElement("p", null,
-            "Error: ",
-            loadState?.error?.message ?? 'no error message');
+            "Error: ", (_b = (_a = loadState === null || loadState === void 0 ? void 0 : loadState.error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : 'no error message');
     }
     const { renderPage, pageData } = loadState.pageLoaded;
     const view = renderPage({
@@ -2237,21 +2257,21 @@ const PageLoader = ({ pages, path }) => {
 
 const pages = {};
 pages["/"] = {
-              _importFn: () => import('./__rootIndex__.4abe7c1b.js'),
-              staticData: {"sort":0,"sourceType":"md"},
-          };
+             _importFn: () => import('./__rootIndex__.83cdefd9.js'),
+             staticData: {"sort":0,"sourceType":"md"},
+         };
 pages["/page-data"] = {
-              _importFn: () => import('./page-data.b9cae807.js'),
-              staticData: {"sort":3,"sourceType":"md"},
-          };
+             _importFn: () => import('./page-data.6dec18d7.js'),
+             staticData: {"sort":3,"sourceType":"md"},
+         };
 pages["/pages"] = {
-              _importFn: () => import('./pages.7b3d8f69.js'),
-              staticData: {"sort":1,"sourceType":"md"},
-          };
+             _importFn: () => import('./pages.3283ccf8.js'),
+             staticData: {"sort":1,"sourceType":"md"},
+         };
 pages["/theme"] = {
-              _importFn: () => import('./theme.9fa7fda8.js'),
-              staticData: {"sort":2,"sourceType":"md"},
-          };
+             _importFn: () => import('./theme.f4f13473.js'),
+             staticData: {"sort":2,"sourceType":"md"},
+         };
 
 /// <reference types="vite/hmr" />
 let routes = getRouteFromPagesData(pages);
@@ -2271,7 +2291,7 @@ function getRouteFromPagesData(pages) {
     });
 }
 
-ReactDOM.render(React.createElement(React.StrictMode, null,
+ReactDOM.hydrate(React.createElement(React.StrictMode, null,
     React.createElement(BrowserRouter, { basename: "/vite-plugin-react-pages/" },
         React.createElement(App, null))), document.getElementById('root'));
 

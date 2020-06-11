@@ -1,4 +1,4 @@
-import { R as React, L as Link } from './index.bd465366.js';
+import { R as React, L as Link } from './client.77dcd073.js';
 
 var s = {"topBar":"topBar_2cc3af24","logo":"logo_2cc3af24","navs":"navs_2cc3af24","navsList":"navsList_2cc3af24","navsListItem":"navsListItem_2cc3af24"};
 
@@ -6,7 +6,7 @@ const TopBar = ({ topNavs, logo }) => {
     return (React.createElement("div", { className: s.topBar },
         React.createElement("div", { className: s.logo }, logo),
         React.createElement("div", { className: s.navs },
-            React.createElement("ul", { className: s.navsList }, topNavs?.map((item, index) => {
+            React.createElement("ul", { className: s.navsList }, topNavs === null || topNavs === void 0 ? void 0 : topNavs.map((item, index) => {
                 let content;
                 if ('href' in item) {
                     content = (React.createElement("a", { href: item.href, target: "_blank", className: s.navsListItem }, item.text));
@@ -44,7 +44,7 @@ const Layout = ({ Content, sideMenuData, topNavs, logo, applyMdStyle, path, }) =
 
 const createRender = ({ topNavs, logo, sideMenuData, } = {}) => {
     return (pageData, pages) => {
-        return (React.createElement(Layout, { Content: pageData.default, sideMenuData: sideMenuData ?? defaultMenu(pages), topNavs: topNavs ?? [], logo: logo, applyMdStyle: pageData.sourceType === 'md', path: pageData.path }));
+        return (React.createElement(Layout, { Content: pageData.default, sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageData.sourceType === 'md', path: pageData.path }));
     };
 };
 function defaultMenu(pages) {
@@ -75,10 +75,12 @@ function defaultMenu(pages) {
 }
 
 var _render = createRender({
-  topNavs: [{
-    text: "Github ⭐",
-    href: "https://github.com/csr632/vite-plugin-react-pages"
-  }],
+  topNavs: [
+    {
+      text: "Github ⭐",
+      href: "https://github.com/csr632/vite-plugin-react-pages"
+    }
+  ],
   logo: "Vite Pages"
 });
 

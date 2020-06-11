@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📘Vite Pages</title>
+<link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.23d5f845.css">
+</head>
+<body>
+  <div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">Github ⭐</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/">/</a></li><li><a href="/pages">/pages</a></li><li><a href="/theme">/theme</a></li><li><a href="/page-data">/page-data</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Page data</h1><h2>Static page metadata</h2><p>For <code>.tsx|.jsx</code> pages, you can define static data with <strong>comment at the top of the file</strong>.</p><pre><code class="language-tsx">/**
+ * @title index page
+ * @tags tag1,tag2
+ */
+</code></pre><p>This will be resolved into:</p><pre><code class="language-json">{ &quot;title&quot;: &quot;index page&quot;, &quot;tags&quot;: &quot;tag1,tag2&quot; }
+</code></pre><p>For <code>.md|.mdx</code> pages, you can define static data with YAML front matter:</p><pre><code class="language-md">---
+title: my page
+tags:
+  - tag1
+  - tag2
+---
+</code></pre><p>This will be resolved into:</p><pre><code class="language-json">{ &quot;title&quot;: &quot;my page&quot;, &quot;tags&quot;: [&quot;tag1&quot;, &quot;tag2&quot;] }
+</code></pre><h2>runtime page data</h2><p>Runtime page data is just anything you export from a page file.</p><h2>Difference</h2><p>Both static data and runtime data will be passed to <!-- -->_<!-- -->render.js, so the theme can use them to render layout.
+Difference:</p><ul><li>Static data of <strong>all pages</strong> is loaded when the app bootstrap. So you should try to keep the static data small.</li><li>Runtime data is loaded when user navigate to the page.</li><li>The value type of static data is limited (string or simple object/array); The value of runtime data can be javascript value (.e.g a React component).</li></ul><h2>Where to consume these data</h2><p>As stated in the <a href="/theme">theme doc</a>, <code>_render.tsx</code> should export a <strong>render function</strong> with this type:</p><pre><code class="language-ts">type IRenderPage = (pageData: any, pages: IPages) =&gt; React.ReactElement
+</code></pre><p>The <code>pageData</code> will be:</p><pre><code class="language-ts">{
+  ...pageStaticData, // static data of current page
+  ...pageRuntimeData, // runtime data of current page
+  path: &#x27;/page/path&#x27;,
+}
+</code></pre><p>The <code>pages</code> will be the <strong>static data of all pages</strong>:</p><pre><code class="language-ts">interface IPages {
+  [path: string]: {
+    staticData: any
+  }
+}
+</code></pre></div></div></div></div>
+  
+<script type="module" src="/vite-plugin-react-pages/_assets/client.77dcd073.js"></script>
+</body>
+</html>
