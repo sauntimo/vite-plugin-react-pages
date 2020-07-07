@@ -2203,77 +2203,237 @@ var NavLink = forwardRef$1$1(function (_ref, forwardedRef) {
  * so the App can render the page data directly
  * instead of render the loading state
  */
-const ssrDataCtx = createContext(undefined);
+const dataCacheCtx = createContext({ pages: {} });
+const setDataCacheCtx = createContext(() => {
+    throw new Error(`setDataCacheCtx not found`);
+});
 
 const PageLoader = ({ pages, path }) => {
-    var _a, _b;
-    const { staticData: pageStaticData, _importFn } = pages[path];
-    const ssrData = useContext(ssrDataCtx);
+    const { _importFn, theme } = pages[path];
+    const _pageStaticData = { ...pages[path].staticData, _path: path };
+    const dataCache = useContext(dataCacheCtx);
+    const setDataCache = useContext(setDataCacheCtx);
     const [loadState, setLoadState] = useState(() => {
-        if (ssrData) {
+        if (dataCache.pages[path]) {
             // we already have the data in ssr
             // don't need to dynamic load it
             return {
                 type: 'loaded',
-                pageLoaded: ssrData.pages[path],
+                pageData: { ..._pageStaticData, ...dataCache.pages[path] },
             };
         }
         return {
-            type: 'loading',
+            type: 'initial-loading',
+            pageStaticData: _pageStaticData,
         };
     });
     useEffect(() => {
-        _importFn()
-            .then((pageLoaded) => {
+        if (dataCache.pages[path]) {
+            // we already have the data in ssr
+            // don't need to dynamic load it
             setLoadState({
                 type: 'loaded',
-                pageLoaded,
+                pageData: { ..._pageStaticData, ...dataCache.pages[path] },
+            });
+            return;
+        }
+        // state machine transition
+        switch (loadState.type) {
+            case 'initial-loading':
+                setLoadState({
+                    type: 'initial-loading',
+                    pageStaticData: _pageStaticData,
+                });
+                break;
+            case 'loaded':
+                setLoadState({
+                    type: 'transition-loading',
+                    pageStaticData: _pageStaticData,
+                    prevPageData: loadState.pageData,
+                });
+                break;
+            case 'transition-loading':
+                setLoadState({
+                    type: 'transition-loading',
+                    prevPageData: loadState.prevPageData,
+                    pageStaticData: _pageStaticData,
+                });
+                break;
+            case 'load-error':
+                setLoadState({
+                    type: 'initial-loading',
+                    pageStaticData: _pageStaticData,
+                });
+                break;
+            default:
+                throw new Error(`unknown loadState.type`);
+        }
+        // FIXME handle race condition of this async setState
+        _importFn()
+            .then((pageLoaded) => {
+            setDataCache((prev) => ({
+                ...prev,
+                pages: {
+                    ...prev.pages,
+                    [path]: pageLoaded.pageData,
+                },
+            }));
+            setLoadState({
+                type: 'loaded',
+                pageData: { ..._pageStaticData, ...pageLoaded.pageData },
             });
         })
             .catch((error) => {
             setLoadState({
-                type: 'error',
+                type: 'load-error',
+                pageStaticData: _pageStaticData,
                 error,
             });
             throw error;
         });
-    }, [_importFn]);
-    // TODO: let user or theme config renderLoading and renderError
-    if (loadState.type === 'loading') {
-        return React.createElement("p", null, "Loading...");
+    }, [path]);
+    switch (loadState.type) {
+        case 'initial-loading':
+            return theme.initialLoading(loadState.pageStaticData, pages);
+        case 'loaded':
+            return theme.loaded(loadState.pageData, pages);
+        case 'transition-loading':
+            if (theme.transitionLoading)
+                return theme.transitionLoading(loadState.pageStaticData, pages, loadState.prevPageData);
+            return theme.initialLoading(loadState.pageStaticData, pages);
+        case 'load-error':
+            return theme.loadError(loadState.error, loadState.pageStaticData, pages);
+        default:
+            throw new Error(`unknown loadState.type`);
     }
-    if (loadState.type === 'error') {
-        return React.createElement("p", null,
-            "Error: ", (_b = (_a = loadState === null || loadState === void 0 ? void 0 : loadState.error) === null || _a === void 0 ? void 0 : _a.message) !== null && _b !== void 0 ? _b : 'no error message');
-    }
-    const { renderPage, pageData } = loadState.pageLoaded;
-    const view = renderPage({
-        ...pageStaticData,
-        ...pageData,
-        path,
-    }, pages);
-    return view;
 };
+
+var s = {"topBar":"topBar_2cc3af24","logo":"logo_2cc3af24","navs":"navs_2cc3af24","navsList":"navsList_2cc3af24","navsListItem":"navsListItem_2cc3af24"};
+
+const TopBar = ({ topNavs, logo }) => {
+    return (React.createElement("div", { className: s.topBar },
+        React.createElement("div", { className: s.logo }, logo),
+        React.createElement("div", { className: s.navs },
+            React.createElement("ul", { className: s.navsList }, topNavs === null || topNavs === void 0 ? void 0 : topNavs.map((item, index) => {
+                let content;
+                if ('href' in item) {
+                    content = (React.createElement("a", { href: item.href, target: "_blank", className: s.navsListItem }, item.text));
+                }
+                else {
+                    content = (React.createElement(Link, { to: item.path, className: s.navsListItem }, item.text));
+                }
+                return React.createElement("li", { key: index }, content);
+            })))));
+};
+
+var s$1 = {"sideMenu":"sideMenu_35ebcd6a"};
+
+const SideMenu = ({ data }) => {
+    return (React.createElement("ul", { className: s$1.sideMenu }, data.map((item, index) => {
+        return (React.createElement("li", { key: index },
+            React.createElement(Link, { to: item.path }, item.text)));
+    })));
+};
+
+var s$2 = {"layout":"layout_eef6d5a0","body":"body_eef6d5a0","content":"content_eef6d5a0"};
+
+;
+
+;
+
+const Layout = ({ sideMenuData, topNavs, logo, applyMdStyle, path, children, }) => {
+    return (React.createElement("div", { className: s$2.layout },
+        React.createElement(TopBar, { topNavs: topNavs, logo: logo }),
+        React.createElement("div", { className: s$2.body },
+            React.createElement(SideMenu, { data: sideMenuData }),
+            React.createElement("div", { className: s$2.content + (applyMdStyle ? ` markdown-body` : ''), key: path }, children))));
+};
+
+function createTheme({ topNavs, logo, sideMenuData, } = {}) {
+    return {
+        initialLoading(pageStaticData, pages) {
+            return (React.createElement(Layout, { sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageStaticData.sourceType === 'md', path: pageStaticData._path },
+                React.createElement("p", null, "initial Loading...")));
+        },
+        loaded(pageData, pages) {
+            const ContentComp = pageData.default;
+            return (React.createElement(Layout, { sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageData.sourceType === 'md', path: pageData._path },
+                React.createElement(ContentComp, null)));
+        },
+        transitionLoading(pageStaticData, pages, prevPageData) {
+            return (React.createElement(Layout, { sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageStaticData.sourceType === 'md', path: pageStaticData._path },
+                React.createElement("p", null, "transition Loading...")));
+        },
+        loadError(error, pageStaticData, pages) {
+            return (React.createElement(Layout, { sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageStaticData.sourceType === 'md', path: pageStaticData._path },
+                React.createElement("p", null, "Load error")));
+        },
+    };
+}
+function defaultMenu(pages) {
+    return Object.entries(pages)
+        .sort((a, b) => {
+        const [pathA, { staticData: staticDataA }] = a;
+        const [pathB, { staticData: staticDataB }] = b;
+        let ASort;
+        let BSort;
+        if (staticDataA.sort)
+            ASort = Number(staticDataA.sort);
+        else
+            ASort = 1;
+        if (staticDataB.sort)
+            BSort = Number(staticDataB.sort);
+        else
+            BSort = 1;
+        if (ASort !== BSort)
+            return ASort - BSort;
+        return pathA.localeCompare(pathB);
+    })
+        .map(([path, { staticData }]) => {
+        return {
+            path,
+            text: path,
+        };
+    });
+}
+
+var theme3 = createTheme({
+  topNavs: [
+    {
+      text: "🎮 Example",
+      href: "https://github.com/csr632/vite-pages-example"
+    },
+    {
+      text: "⭐ Github",
+      href: "https://github.com/vitejs/vite-plugin-react-pages"
+    }
+  ],
+  logo: "Vite Pages"
+});
 
 const pages = {};
 pages["/"] = {
-             _importFn: () => import('./__rootIndex__.882457af.js'),
-             staticData: {"sort":0,"sourceType":"md"},
-         };
+    _importFn: () => import('./__rootIndex__.a560d2f0.js'),
+    staticData: {"sort":0,"sourceType":"md"},
+    theme: theme3,
+};
 pages["/page-data"] = {
-             _importFn: () => import('./page-data.430357b0.js'),
-             staticData: {"sort":3,"sourceType":"md"},
-         };
+    _importFn: () => import('./page-data.8bf4ddbc.js'),
+    staticData: {"sort":3,"sourceType":"md"},
+    theme: theme3,
+};
 pages["/pages"] = {
-             _importFn: () => import('./pages.50f6b33b.js'),
-             staticData: {"sort":1,"sourceType":"md"},
-         };
+    _importFn: () => import('./pages.f21f64f9.js'),
+    staticData: {"sort":1,"sourceType":"md"},
+    theme: theme3,
+};
 pages["/theme"] = {
-             _importFn: () => import('./theme.3c9a72bc.js'),
-             staticData: {"sort":2,"sourceType":"md"},
-         };
+    _importFn: () => import('./theme.7d281767.js'),
+    staticData: {"sort":2,"sourceType":"md"},
+    theme: theme3,
+};
 
-/// <reference types="vite/hmr" />
+/// <reference types="vite/ImportMeta" />
 let routes = getRouteFromPagesData(pages);
 const App = () => {
     return React.createElement(Switch, null, routes);
@@ -2291,9 +2451,26 @@ function getRouteFromPagesData(pages) {
     });
 }
 
-var _a;
-ReactDOM.hydrate(React.createElement(React.StrictMode, null,
-    React.createElement(BrowserRouter, { basename: (_a = "/vite-plugin-react-pages/") === null || _a === void 0 ? void 0 : _a.replace(/\/$/, '') },
-        React.createElement(App, null))), document.getElementById('root'));
+const Client = ({ initCache }) => {
+    var _a;
+    const [dataCache, setDataCache] = useState(initCache !== null && initCache !== void 0 ? initCache : { pages: {} });
+    return (React.createElement(React.StrictMode, null,
+        React.createElement(BrowserRouter, { basename: (_a = "/vite-plugin-react-pages/") === null || _a === void 0 ? void 0 : _a.replace(/\/$/, '') },
+            React.createElement(dataCacheCtx.Provider, { value: dataCache },
+                React.createElement(setDataCacheCtx.Provider, { value: setDataCache },
+                    React.createElement(App, null))))));
+};
+
+if (!window._vitePagesSSR) {
+    throw new Error(`window._vitePagesSSRPath should be defined`);
+}
+import(window._vitePagesSSR.pageData).then(({ pageData }) => {
+    const initCache = {
+        pages: {
+            [window._vitePagesSSR.pagePublicPath]: { ...pageData },
+        },
+    };
+    ReactDOM.hydrate(React.createElement(Client, { initCache: initCache }), document.getElementById('root'));
+});
 
 export { Link as L, React as R };

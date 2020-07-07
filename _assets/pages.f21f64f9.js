@@ -1,22 +1,24 @@
-import './client.b4185dbd.js';
-import { c as createElement } from './esm.fecdb2ce.js';
-export { _ as renderPage } from './esm.fecdb2ce.js';
+import './clientRender.add4902f.js';
+import { c as createElement } from './esm.c176b8b7.js';
 
 const layoutProps = {};
 const MDXLayout = "wrapper";
-function MDXContent({components, ...props}) {
+function MDXContent({
+  components,
+  ...props
+}) {
   return createElement(MDXLayout, {
     ...layoutProps,
     ...props,
     components,
     mdxType: "MDXLayout"
-  }, createElement("h1", null, `Pages`), createElement("p", null, `Vite pages use filesystem based routing. You can create a page by simply creating a file: `, createElement("inlineCode", {
+  }, createElement("h1", null, `Pages`), createElement("p", null, `vite-pages use filesystem based routing. You can create a page by simply creating a file: `, createElement("inlineCode", {
     parentName: "p"
   }, `page-name$.tsx`), `. Notice the `, createElement("inlineCode", {
     parentName: "p"
   }, `$`), ` `, createElement("strong", {
     parentName: "p"
-  }, `at the end of the filename`), `. Vite pages recognize it and know it is a page file.`), createElement("p", null, `If the filename is `, createElement("inlineCode", {
+  }, `at the end of the filename`), `. vite-pages recognizes it and know it is a page file.`), createElement("p", null, `If the filename is `, createElement("inlineCode", {
     parentName: "p"
   }, `index$.tsx`), `, the page url path will be the path of the directory.`), createElement("blockquote", null, createElement("p", {
     parentName: "blockquote"

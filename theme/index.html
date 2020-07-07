@@ -3,43 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <title>📘Vite Pages</title>
-<link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.7ced9fd6.css">
+<link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.3005f53e.css">
+<link rel="modulepreload" href="/vite-plugin-react-pages/_assets/theme.7d281767.js" />
 </head>
 <body>
-  <div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">Github ⭐</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/vite-plugin-react-pages/">/</a></li><li><a href="/vite-plugin-react-pages/pages">/pages</a></li><li><a href="/vite-plugin-react-pages/theme">/theme</a></li><li><a href="/vite-plugin-react-pages/page-data">/page-data</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Theme customization</h1><p>Vite pages provides only one theme API: <code>_render.tsx</code>.
-<code>_render.tsx</code> should export a <strong>render function</strong>: <code>(pageData: any, pages: IPages) =&gt; React.ReactElement</code>. For example:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
-import Layout from &#x27;../Layout&#x27;
-import type { IRenderPage } from &#x27;vite-plugin-react-pages/client&#x27;
-
-const render: IRenderPage = (pageData, pages) =&gt; {
-  const { default: PageComponent } = pageData
-  return &lt;Layout Content={PageComponent} pages={pages} /&gt;
+  <script>window._vitePagesSSR={"pagePublicPath":"/theme","pageData":"/vite-plugin-react-pages/_assets/theme.7d281767.js"};</script>
+<div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-pages-example" target="_blank" class="navsListItem_2cc3af24">🎮 Example</a></li><li><a href="https://github.com/vitejs/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">⭐ Github</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/vite-plugin-react-pages/">/</a></li><li><a href="/vite-plugin-react-pages/pages">/pages</a></li><li><a href="/vite-plugin-react-pages/theme">/theme</a></li><li><a href="/vite-plugin-react-pages/page-data">/page-data</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Theme customization</h1><p>vite-pages provides only one theme API: <code>_theme.tsx</code>. It should export an object contains these <strong>render functions</strong>:</p><pre><code class="language-ts">interface ITheme {
+  /**
+   * loading the first page&#x27;s data, render the initial loading state.
+   * if the app is build with ssr,
+   * vite-pages will not use it to render the initial loading state.
+   *
+   * @param pageStaticData current page&#x27;s static data.
+   * @param pages all page&#x27;s static data.
+   */
+  initialLoading: (
+    pageStaticData: any,
+    pages: IPages
+  ) =&gt; React.ReactElement | null
+  /**
+   * current page&#x27;s data is ready, render the page content.
+   *
+   * @param pageData current page&#x27;s data. including static data and runtime data.
+   * @param pages all page&#x27;s static data.
+   */
+  loaded: (pageData: IPageLoaded, pages: IPages) =&gt; React.ReactElement | null
+  /**
+   * app is loading another page, render the transition loading state.
+   * if transitionLoading is not provided, vite-pages will fallback to initialLoading.
+   *
+   * @param pageStaticData current page&#x27;s static data.
+   * @param pages all page&#x27;s static data.
+   * @param prevPageData previous page&#x27;s data.
+   */
+  transitionLoading?: (
+    pageStaticData: any,
+    pages: IPages,
+    prevPageData: IPageLoaded
+  ) =&gt; React.ReactElement | null
+  /**
+   * If error happens while loading,
+   * vite-pages will use it to render the error state.
+   *
+   * @param error the error.
+   * @param pageStaticData current page&#x27;s static data.
+   * @param pages all page&#x27;s static data.
+   */
+  loadError: (
+    error: any,
+    pageStaticData: any,
+    pages: IPages
+  ) =&gt; React.ReactElement | null
 }
-export default render
-</code></pre><p>We will explain the parameters of the render function in <a href="/vite-plugin-react-pages/page-data">page-data doc</a>.</p><blockquote><p>The render function should be pure.</p></blockquote><p>You can implement your theme in the Layout component. You can also import a render function from a npm package.</p><h2>Nearest theme config wins</h2><p>You can have multiple <code>_render.tsx</code> in the pages directory. For each page file. It will find-up the nearest <code>_render.tsx</code>. And use it to render the page layout.</p><h2>Suggestion: use higher order function to config theme</h2><p>You can export your theme as a higher order function to make it more configurable.</p><p>For example, theme provider export theme as this function:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
+</code></pre><blockquote><p>These render functions should be pure.</p></blockquote><p>Vite-pages collects data from your project and pass them to these render functions. You can learn about the &quot;data&quot; received by the render functions in <a href="/vite-plugin-react-pages/page-data">page-data doc</a>.</p><p>For example:</p><pre><code class="language-tsx">import React from &#x27;react&#x27;
 import Layout from &#x27;../Layout&#x27;
-import type { IRenderPage } from &#x27;vite-plugin-react-pages/client&#x27;
+import type { ITheme } from &#x27;vite-plugin-react-pages/client&#x27;
 
-export const createTheme = (sideMenuData): IRenderPage =&gt; {
-  return (pageData, pages) =&gt; {
+const theme: ITheme = {
+  initialLoading(pageStaticData, pages) {
     return (
-      &lt;Layout
-        Content={pageData.default}
-        sideMenuData={sideMenuData ?? getDefaultMenuData(pages)}
-      /&gt;
+      &lt;Layout sideMenuData={defaultMenu(pages)}&gt;
+        &lt;p&gt;Loading....&lt;/p&gt;
+      &lt;/Layout&gt;
     )
+  },
+  loaded(pageData, pages) {
+    const Component = pageData.default
+    return (
+      &lt;Layout sideMenuData={defaultMenu(pages)}&gt;
+        &lt;Component /&gt;
+      &lt;/Layout&gt;
+    )
+  },
+  loadError(error, pageStaticData, pages) {
+    console.error(&#x27;load error!&#x27;, error, pageStaticData, pages)
+    return (
+      &lt;Layout sideMenuData={defaultMenu(pages)}&gt;
+        &lt;p&gt;Load error, see console.error&lt;/p&gt;
+      &lt;/Layout&gt;
+    )
+  },
+}
+
+export default theme
+</code></pre><blockquote><p>Real-life example: <a href="https://github.com/vitejs/vite-plugin-react-pages/blob/master/packages/theme-basic/src/index.tsx">vite-pages-theme-basic</a>.</p></blockquote><p>You can customize every bit of UI with these render functions. Welcome to share your theme with a npm package!</p><h2>Nearest theme config wins</h2><p>You can have multiple <code>_theme.tsx</code> in the pages directory. For each page file, vite-pages will find-up the nearest <code>_theme.tsx</code>. And use it to render the page layout.</p><h2>Suggestions</h2><h3>To theme providers: make your theme easier to use</h3><p>We encourage theme providers to export your theme as <strong>a config function</strong> that receive user config and return <code>ITheme</code>.</p><p>For example, the theme provider can export theme as this function:</p><pre><code class="language-tsx">export function createTheme({ sideMenuData }): ITheme {
+  return {
+    initialLoading(pageStaticData, pages) {
+      return (
+        &lt;Layout sideMenuData={sideMenuData}&gt;
+          &lt;p&gt;Loading....&lt;/p&gt;
+        &lt;/Layout&gt;
+      )
+    },
+    loaded(pageData, pages) {
+      const Component = pageData.default
+      return (
+        &lt;Layout sideMenuData={sideMenuData}&gt;
+          &lt;Component /&gt;
+        &lt;/Layout&gt;
+      )
+    },
+    loadError(error, pageStaticData, pages) {
+      console.error(&#x27;load error!&#x27;, error, pageStaticData, pages)
+      return (
+        &lt;Layout sideMenuData={sideMenuData}&gt;
+          &lt;p&gt;Load error, see console.error&lt;/p&gt;
+        &lt;/Layout&gt;
+      )
+    },
   }
 }
-</code></pre><p>Theme consumer can use it multiple times to make different sideMenu in different pages.</p><p>Configure sideMenu for <code>/guides/*</code> in <code>/guides/_render.tsx</code>:</p><pre><code class="language-tsx">export default createTheme([
+</code></pre><p>Theme consumer can use it multiple times to make different sideMenu in different pages:</p><pre><code class="language-tsx">// Configure sideMenu for `/guides/*` in `/guides/_theme.tsx`:
+import createTheme from &#x27;theme-pkg&#x27;
+export default createTheme([
   { path: &#x27;/guides/guide1&#x27;, label: &#x27;guide1&#x27; },
   { path: &#x27;/guides/guide2&#x27;, label: &#x27;guide1&#x27; },
 ])
-</code></pre><p>Configure sideMenu for <code>/references/*</code> in <code>/references/_render.tsx</code>:</p><pre><code class="language-tsx">export default createTheme([
+
+// Configure sideMenu for `/references/*` in `/references/_theme.tsx`:
+import createTheme from &#x27;theme-pkg&#x27;
+export default createTheme([
   { path: &#x27;/references/ref1&#x27;, label: &#x27;ref1&#x27; },
   { path: &#x27;/references/ref2&#x27;, label: &#x27;ref2&#x27; },
 ])
-</code></pre><p>We encourage theme providers to export config function like this <code>createTheme</code>, to make theme easier to use.</p><h2>Caveat</h2><p>React will re-mount the component if the vdom tree hierarchy changes (.e.g <code>&lt;Layout /&gt;</code> -&gt; <code>&lt;div&gt;&lt;Layout /&gt;&lt;/div&gt;</code>). If you want to retain the Layout component (so that the SideMenu scroll state won&#x27;t get reset), you should render the Layout component in the &quot;same position&quot;.</p><p>The props of Layout component can change as you like. You can use that to make Layout component behave differently.</p></div></div></div></div>
+</code></pre><p>As you can see, the theme is easier to use because <strong>consumers don&#x27;t need to know about the <code>_theme.tsx</code> API and <code>ITheme</code></strong>. For this reason, we encourage theme providers to export config function like the <code>createTheme</code> above.</p><h3>To theme consumers: config composition is just function composition</h3><p>If your are a theme consumer, you can also create higher order functions to reuse config. For example, given the <code>createTheme</code> above, theme consumers can create this function:</p><pre><code class="language-tsx">// provide some config that applied to whole site
+// `/with-site-config.tsx`:
+import createTheme from &#x27;theme-pkg&#x27;
+// the &quot;index menu item&quot; is a site-wise config
+export default (pageMenu) =&gt;
+  createTheme([{ path: &#x27;/site-index&#x27;, label: &#x27;index&#x27; }, ...pageMenu])
+
+// add some config that is only applied to `/guides/*`
+// `/guides/_theme.tsx`:
+import withSiteConfig from &#x27;../with-site-config&#x27;
+export default withSiteConfig([
+  { path: &#x27;/guides/guide1&#x27;, label: &#x27;guide1&#x27; },
+  { path: &#x27;/guides/guide2&#x27;, label: &#x27;guide1&#x27; },
+])
+
+// add some config that is only applied to `/references/*`
+// `/references/_theme.tsx`:
+import withSiteConfig from &#x27;../with-site-config&#x27;
+export default withSiteConfig([
+  { path: &#x27;/references/ref1&#x27;, label: &#x27;ref1&#x27; },
+  { path: &#x27;/references/ref2&#x27;, label: &#x27;ref2&#x27; },
+])
+</code></pre><p><strong>Config composition is just function composition</strong>. There is no magic here. They are just simple import/export and function composition. vite-pages doesn&#x27;t care how you get the render function, as long as you export the render functions in <code>_theme.tsx</code>.</p><h3>Why design this config API?</h3><h4>Composable</h4><p>It utilize the functional power from JavaScript, making theme config highly composable. Users can share their theme through npm packages.</p><h4>Releases the power of Typescript</h4><p>Users can get Typescript type-check and intelliSense when they are writing these kind of config code. In comparison, <strong>most frameworks out there can&#x27;t utilize the power of Typescript, because their config is too &quot;dynamic&quot; to be type-checked</strong>.</p><h2>Caveat</h2><p>React will re-mount the component if the vdom tree hierarchy changes (.e.g <code>&lt;Layout /&gt;</code> -&gt; <code>&lt;div&gt;&lt;Layout /&gt;&lt;/div&gt;</code>). If you want to retain the Layout component (.e.g so that the SideMenu scroll state won&#x27;t get reset), your theme should render the Layout component in the &quot;same position&quot;.</p><p>The props of the component can change as you like and React will not re-mount it. Themes should take advantage of this property to make Layout behave differently across different pages.</p></div></div></div></div>
   
-<script type="module" src="/vite-plugin-react-pages/_assets/client.b4185dbd.js"></script>
+<script type="module" src="/vite-plugin-react-pages/_assets/clientRender.e1dfc181.js"></script>
 </body>
 </html>

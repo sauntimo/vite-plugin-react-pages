@@ -1,88 +1,4 @@
-import { R as React, L as Link } from './client.b4185dbd.js';
-
-var s = {"topBar":"topBar_2cc3af24","logo":"logo_2cc3af24","navs":"navs_2cc3af24","navsList":"navsList_2cc3af24","navsListItem":"navsListItem_2cc3af24"};
-
-const TopBar = ({ topNavs, logo }) => {
-    return (React.createElement("div", { className: s.topBar },
-        React.createElement("div", { className: s.logo }, logo),
-        React.createElement("div", { className: s.navs },
-            React.createElement("ul", { className: s.navsList }, topNavs === null || topNavs === void 0 ? void 0 : topNavs.map((item, index) => {
-                let content;
-                if ('href' in item) {
-                    content = (React.createElement("a", { href: item.href, target: "_blank", className: s.navsListItem }, item.text));
-                }
-                else {
-                    content = (React.createElement(Link, { to: item.path, className: s.navsListItem }, item.text));
-                }
-                return React.createElement("li", { key: index }, content);
-            })))));
-};
-
-var s$1 = {"sideMenu":"sideMenu_35ebcd6a"};
-
-const SideMenu = ({ data }) => {
-    return (React.createElement("ul", { className: s$1.sideMenu }, data.map((item, index) => {
-        return (React.createElement("li", { key: index },
-            React.createElement(Link, { to: item.path }, item.text)));
-    })));
-};
-
-var s$2 = {"layout":"layout_eef6d5a0","body":"body_eef6d5a0","content":"content_eef6d5a0"};
-
-;
-
-;
-
-const Layout = ({ Content, sideMenuData, topNavs, logo, applyMdStyle, path, }) => {
-    return (React.createElement("div", { className: s$2.layout },
-        React.createElement(TopBar, { topNavs: topNavs, logo: logo }),
-        React.createElement("div", { className: s$2.body },
-            React.createElement(SideMenu, { data: sideMenuData }),
-            React.createElement("div", { className: s$2.content + (applyMdStyle ? ` markdown-body` : ''), key: path },
-                React.createElement(Content, null)))));
-};
-
-const createRender = ({ topNavs, logo, sideMenuData, } = {}) => {
-    return (pageData, pages) => {
-        return (React.createElement(Layout, { Content: pageData.default, sideMenuData: sideMenuData !== null && sideMenuData !== void 0 ? sideMenuData : defaultMenu(pages), topNavs: topNavs !== null && topNavs !== void 0 ? topNavs : [], logo: logo, applyMdStyle: pageData.sourceType === 'md', path: pageData.path }));
-    };
-};
-function defaultMenu(pages) {
-    return Object.entries(pages)
-        .sort((a, b) => {
-        const [pathA, { staticData: staticDataA }] = a;
-        const [pathB, { staticData: staticDataB }] = b;
-        let ASort;
-        let BSort;
-        if (staticDataA.sort)
-            ASort = Number(staticDataA.sort);
-        else
-            ASort = 1;
-        if (staticDataB.sort)
-            BSort = Number(staticDataB.sort);
-        else
-            BSort = 1;
-        if (ASort !== BSort)
-            return ASort - BSort;
-        return pathA.localeCompare(pathB);
-    })
-        .map(([path, { staticData }]) => {
-        return {
-            path,
-            text: path,
-        };
-    });
-}
-
-var _render = createRender({
-  topNavs: [
-    {
-      text: "Github ⭐",
-      href: "https://github.com/csr632/vite-plugin-react-pages"
-    }
-  ],
-  logo: "Vite Pages"
-});
+import { R as React } from './clientRender.add4902f.js';
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -190,10 +106,10 @@ var DEFAULTS = {
   inlineCode: 'code',
   wrapper: function wrapper(_ref) {
     var children = _ref.children;
-    return React.createElement(React.Fragment, {}, children);
+    return /*#__PURE__*/React.createElement(React.Fragment, {}, children);
   }
 };
-var MDXCreateElement = React.forwardRef(function (props, ref) {
+var MDXCreateElement = /*#__PURE__*/React.forwardRef(function (props, ref) {
   var propComponents = props.components,
       mdxType = props.mdxType,
       originalType = props.originalType,
@@ -205,14 +121,14 @@ var MDXCreateElement = React.forwardRef(function (props, ref) {
   var Component = components["".concat(parentName, ".").concat(type)] || components[type] || DEFAULTS[type] || originalType;
 
   if (propComponents) {
-    return React.createElement(Component, _objectSpread2(_objectSpread2({
+    return /*#__PURE__*/React.createElement(Component, _objectSpread2(_objectSpread2({
       ref: ref
     }, etc), {}, {
       components: propComponents
     }));
   }
 
-  return React.createElement(Component, _objectSpread2({
+  return /*#__PURE__*/React.createElement(Component, _objectSpread2({
     ref: ref
   }, etc));
 });
@@ -247,4 +163,4 @@ function createElement (type, props) {
   return React.createElement.apply(null, args);
 }
 
-export { _render as _, createElement as c };
+export { createElement as c };
