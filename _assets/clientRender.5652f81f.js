@@ -605,6 +605,41 @@ function resolvePathname(to, from) {
   return result;
 }
 
+function valueOf(obj) {
+  return obj.valueOf ? obj.valueOf() : Object.prototype.valueOf.call(obj);
+}
+
+function valueEqual(a, b) {
+  // Test for strict equality first.
+  if (a === b) return true;
+
+  // Otherwise, if either of them == null they are not equal.
+  if (a == null || b == null) return false;
+
+  if (Array.isArray(a)) {
+    return (
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every(function(item, index) {
+        return valueEqual(item, b[index]);
+      })
+    );
+  }
+
+  if (typeof a === 'object' || typeof b === 'object') {
+    var aValue = valueOf(a);
+    var bValue = valueOf(b);
+
+    if (aValue !== a || bValue !== b) return valueEqual(aValue, bValue);
+
+    return Object.keys(Object.assign({}, a, b)).every(function(key) {
+      return valueEqual(a[key], b[key]);
+    });
+  }
+
+  return false;
+}
+
 var prefix = 'Invariant failed';
 function invariant(condition, message) {
     if (condition) {
@@ -715,6 +750,9 @@ function createLocation(path, state, key, currentLocation) {
   }
 
   return location;
+}
+function locationsAreEqual(a, b) {
+  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && valueEqual(a.state, b.state);
 }
 
 function createTransitionManager() {
@@ -1815,6 +1853,112 @@ function (_React$Component) {
   return Router;
 }(React.Component);
 
+var Lifecycle =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Lifecycle, _React$Component);
+
+  function Lifecycle() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Lifecycle.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    if (this.props.onMount) this.props.onMount.call(this, this);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props.onUpdate) this.props.onUpdate.call(this, this, prevProps);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    if (this.props.onUnmount) this.props.onUnmount.call(this, this);
+  };
+
+  _proto.render = function render() {
+    return null;
+  };
+
+  return Lifecycle;
+}(React.Component);
+
+var cache = {};
+var cacheLimit = 10000;
+var cacheCount = 0;
+
+function compilePath(path) {
+  if (cache[path]) return cache[path];
+  var generator = pathToRegexp_1.compile(path);
+
+  if (cacheCount < cacheLimit) {
+    cache[path] = generator;
+    cacheCount++;
+  }
+
+  return generator;
+}
+/**
+ * Public API for generating a URL pathname from a path and parameters.
+ */
+
+
+function generatePath(path, params) {
+  if (path === void 0) {
+    path = "/";
+  }
+
+  if (params === void 0) {
+    params = {};
+  }
+
+  return path === "/" ? path : compilePath(path)(params, {
+    pretty: true
+  });
+}
+
+/**
+ * The public API for navigating programmatically with a component.
+ */
+
+function Redirect(_ref) {
+  var computedMatch = _ref.computedMatch,
+      to = _ref.to,
+      _ref$push = _ref.push,
+      push = _ref$push === void 0 ? false : _ref$push;
+  return React.createElement(context.Consumer, null, function (context) {
+    !context ?  invariant(false) : void 0;
+    var history = context.history,
+        staticContext = context.staticContext;
+    var method = push ? history.push : history.replace;
+    var location = createLocation(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : _extends({}, to, {
+      pathname: generatePath(to.pathname, computedMatch.params)
+    }) : to); // When rendering in a static context,
+    // set the new location immediately.
+
+    if (staticContext) {
+      method(location);
+      return null;
+    }
+
+    return React.createElement(Lifecycle, {
+      onMount: function onMount() {
+        method(location);
+      },
+      onUpdate: function onUpdate(self, prevProps) {
+        var prevLocation = createLocation(prevProps.to);
+
+        if (!locationsAreEqual(prevLocation, _extends({}, location, {
+          key: prevLocation.key
+        }))) {
+          method(location);
+        }
+      },
+      to: to
+    });
+  });
+}
+
 var cache$1 = {};
 var cacheLimit$1 = 10000;
 var cacheCount$1 = 0;
@@ -2372,6 +2516,7 @@ function createTheme({ topNavs, logo, sideMenuData, } = {}) {
 }
 function defaultMenu(pages) {
     return Object.entries(pages)
+        .filter(([path]) => path !== '/404')
         .sort((a, b) => {
         const [pathA, { staticData: staticDataA }] = a;
         const [pathB, { staticData: staticDataB }] = b;
@@ -2397,7 +2542,7 @@ function defaultMenu(pages) {
     });
 }
 
-var theme3 = createTheme({
+var theme5 = createTheme({
   topNavs: [
     {
       text: "🎮 Example",
@@ -2413,33 +2558,48 @@ var theme3 = createTheme({
 
 const pages = {};
 pages["/"] = {
-    _importFn: () => import('./__rootIndex__.a560d2f0.js'),
+    _importFn: () => import('./__rootIndex__.358ede75.js'),
     staticData: {"sort":0,"sourceType":"md"},
-    theme: theme3,
+    theme: theme5,
+};
+pages["/404"] = {
+    _importFn: () => import('./404.3475fc13.js'),
+    staticData: {"sourceType":"js"},
+    theme: theme5,
+};
+pages["/magic-import"] = {
+    _importFn: () => import('./magic-import.78fcfb6f.js'),
+    staticData: {"sort":4,"sourceType":"md"},
+    theme: theme5,
 };
 pages["/page-data"] = {
-    _importFn: () => import('./page-data.8bf4ddbc.js'),
+    _importFn: () => import('./page-data.04cf7c0e.js'),
     staticData: {"sort":3,"sourceType":"md"},
-    theme: theme3,
+    theme: theme5,
 };
 pages["/pages"] = {
-    _importFn: () => import('./pages.f21f64f9.js'),
+    _importFn: () => import('./pages.c403e89e.js'),
     staticData: {"sort":1,"sourceType":"md"},
-    theme: theme3,
+    theme: theme5,
 };
 pages["/theme"] = {
-    _importFn: () => import('./theme.7d281767.js'),
+    _importFn: () => import('./theme.c7c1c272.js'),
     staticData: {"sort":2,"sourceType":"md"},
-    theme: theme3,
+    theme: theme5,
 };
 
-/// <reference types="vite/ImportMeta" />
-let routes = getRouteFromPagesData(pages);
+/// <reference types="vite/dist/ImportMeta" />
+let routes = getRoutesFromPagesData(pages);
+let fallbackRoute = getFallbackRoute(pages);
 const App = () => {
-    return React.createElement(Switch, null, routes);
+    return (React.createElement(Switch, null,
+        routes,
+        fallbackRoute));
 };
-function getRouteFromPagesData(pages) {
-    return Object.keys(pages).map((path) => {
+function getRoutesFromPagesData(pages) {
+    return Object.keys(pages)
+        .filter((path) => path !== '/404')
+        .map((path) => {
         return (React.createElement(Route
         // avoid re-mount layout component
         // https://github.com/ReactTraining/react-router/issues/3928#issuecomment-284152397
@@ -2449,6 +2609,16 @@ function getRouteFromPagesData(pages) {
             key: "same", exact: true, path: path },
             React.createElement(PageLoader, { pages: pages, path: path })));
     });
+}
+function getFallbackRoute(pages) {
+    let content;
+    if ('/404' in pages) {
+        content = React.createElement(PageLoader, { pages: pages, path: "/404" });
+    }
+    else {
+        content = React.createElement("p", null, "Route Not Found");
+    }
+    return React.createElement(Route, { path: "*" }, content);
 }
 
 const Client = ({ initCache }) => {
@@ -2473,4 +2643,4 @@ import(window._vitePagesSSR.pageData).then(({ pageData }) => {
     ReactDOM.hydrate(React.createElement(Client, { initCache: initCache }), document.getElementById('root'));
 });
 
-export { Link as L, React as R };
+export { Link as L, React as R, Redirect as a };
