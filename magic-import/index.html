@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>📘Vite Pages</title>
-<link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.fb83ba9a.css">
-<link rel="modulepreload" href="/vite-plugin-react-pages/_assets/magic-import.78fcfb6f.js" />
+<link rel="stylesheet" href="/vite-plugin-react-pages/_assets/style.3005f53e.css">
+<link rel="modulepreload" href="/vite-plugin-react-pages/_assets/magic-import.e338640c.js" />
 </head>
 <body>
-  <script>window._vitePagesSSR={"pagePublicPath":"/magic-import","pageData":"/vite-plugin-react-pages/_assets/magic-import.78fcfb6f.js"};</script>
+  <script>window._vitePagesSSR={"pagePublicPath":"/magic-import","pageData":"/vite-plugin-react-pages/_assets/magic-import.e338640c.js"};</script>
 <div id="root"><div class="layout_eef6d5a0"><div class="topBar_2cc3af24"><div class="logo_2cc3af24">Vite Pages</div><div class="navs_2cc3af24"><ul class="navsList_2cc3af24"><li><a href="https://github.com/csr632/vite-pages-example" target="_blank" class="navsListItem_2cc3af24">🎮 Example</a></li><li><a href="https://github.com/vitejs/vite-plugin-react-pages" target="_blank" class="navsListItem_2cc3af24">⭐ Github</a></li></ul></div></div><div class="body_eef6d5a0"><ul class="sideMenu_35ebcd6a"><li><a href="/vite-plugin-react-pages/">/</a></li><li><a href="/vite-plugin-react-pages/pages">/pages</a></li><li><a href="/vite-plugin-react-pages/theme">/theme</a></li><li><a href="/vite-plugin-react-pages/page-data">/page-data</a></li><li><a href="/vite-plugin-react-pages/magic-import">/magic-import</a></li></ul><div class="content_eef6d5a0 markdown-body"><h1>Magic import</h1><p>vite-pages support a special import format that can help you do powerful things.</p><h2>Analyze source code</h2><p>When you are documenting for some JavaScript/Typescript library, you normally want to show some js/ts code to readers. This magic import help you load source code from a module. It is kind of like <a href="https://webpack.js.org/loaders/raw-loader/">raw-loader from webpack</a>. This is very useful for demo code displaying.</p><p>You can get the module tree analysis by importing the module with query <code>?analyzeSource</code>.</p><p>For example:</p><pre><code class="language-ts">import demoSource from &#x27;../demos/demo1?analyzeSource&#x27;
 </code></pre><p>will give you:</p><pre><code class="language-ts">{
   &quot;entry&quot;: &quot;demo1.tsx&quot;,
@@ -19,16 +19,16 @@
       &quot;code&quot;: &quot;.box {\n  border: 1px solid black;\n  padding: 16px;\n}\n\n.title {\n  margin-top: 0;\n  margin-bottom: 8px;\n  color: blue;\n}\n&quot;
     },
     &quot;demo1.tsx&quot;: {
-      &quot;code&quot;: &quot;import React, { useState, useEffect, useCallback } from &#x27;react&#x27;\n// This is an external library used by demo\nimport Select from &#x27;react-select&#x27;\n\nimport util from &#x27;./dir/util&#x27;\nimport style from &#x27;./demo1.module.css&#x27;\n\ninterface IProps {}\n\nconst Demo1: React.FC&lt;IProps&gt; = (props) =&gt; {\n  useEffect(() =&gt; {\n    util(&#x27;demo1&#x27;)\n  }, [])\n\n  const [selected, setSelected] = useState(null)\n  const handleChange = useCallback((newSelected) =&gt; {\n    setSelected(newSelected)\n  }, [])\n\n  return (\n    &lt;div className={style.box}&gt;\n      &lt;h1 className={style.title}&gt;Demo1&lt;/h1&gt;\n      &lt;Select value={selected} onChange={handleChange} options={options} /&gt;\n    &lt;/div&gt;\n  )\n}\n\nconst options = [\n  { value: &#x27;chocolate&#x27;, label: &#x27;Chocolate&#x27; },\n  { value: &#x27;strawberry&#x27;, label: &#x27;Strawberry&#x27; },\n  { value: &#x27;vanilla&#x27;, label: &#x27;Vanilla&#x27; },\n]\n\nexport default Demo1\n&quot;
+      &quot;code&quot;: &quot;import React, { useState, useEffect, useCallback } from &#x27;react&#x27;\n// This is an external library used by demo\nimport { Button } from &#x27;antd&#x27;\nimport &#x27;antd/dist/antd.css&#x27;\n\nimport util from &#x27;./dir/util&#x27;\nimport style from &#x27;./demo1.module.css&#x27;\n\ninterface IProps {}\n\nconst Demo1: React.FC&lt;IProps&gt; = (props) =&gt; {\n  useEffect(() =&gt; {\n    util(&#x27;demo1&#x27;)\n  }, [])\n\n  return (\n    &lt;div className={style.box}&gt;\n      &lt;h1 className={style.title}&gt;This demo use a library&lt;/h1&gt;\n      &lt;Button type=\&quot;primary\&quot;&gt;Primary Button&lt;/Button&gt;\n    &lt;/div&gt;\n  )\n}\n\nexport default Demo1\n&quot;
     }
   },
   &quot;externals&quot;: {
     &quot;react&quot;: &quot;^16.13.1&quot;,
-    &quot;react-select&quot;: &quot;^3.1.0&quot;
+    &quot;antd&quot;: &quot;^4.4.1&quot;
   }
 }
 </code></pre><p>Checkout the <a href="https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/analyze-source-code/pages/index$.tsx">analyze-source-code fixture</a>.</p><h3>Relative module dependencies</h3><p>Relative module dependencies(.e.g <code>import util from &#x27;./dir/util.ts&#x27;</code>) will also be collected into the analyze result, as shown by the previous example.</p><p>Relative module import can be:</p><ul><li>js, jsx, ts, tsx</li><li>css</li><li>Sass. You need to install <code>node-sass</code></li><li>Stylus. You need to install <code>stylus</code></li><li>Less. You need to install <code>less</code></li></ul><h3>External module dependencies</h3><p>For those dependencies from <code>node_modules</code> (.e.g <code>import React from &#x27;react&#x27;</code>), this magic import will not load source code for them. Instead, the dependencies&#x27; versions are recorded, as shown by the previous example.</p><p>This magic import gets dependencies&#x27; versions by find <code>package.json</code> up from the importer, and find the package version from these <code>package.json</code> fields:</p><ul><li><code>peerDependencies</code></li><li><code>devDependencies</code></li><li><code>dependencies</code></li><li><code>demoDependencies</code></li></ul></div></div></div></div>
   
-<script type="module" src="/vite-plugin-react-pages/_assets/clientRender.999f31be.js"></script>
+<script type="module" src="/vite-plugin-react-pages/_assets/clientRender.ca543509.js"></script>
 </body>
 </html>

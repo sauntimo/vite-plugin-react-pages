@@ -1,4 +1,4 @@
-import { R as React, a as Redirect } from './clientRender.5652f81f.js';
+import { R as React, a as Redirect } from './clientRender.951e5cb6.js';
 
 const Page404 = (props) => {
   return /* @__PURE__ */ React.createElement(Redirect, {

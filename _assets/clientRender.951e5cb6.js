@@ -2558,32 +2558,32 @@ var theme5 = createTheme({
 
 const pages = {};
 pages["/"] = {
-    _importFn: () => import('./__rootIndex__.358ede75.js'),
+    _importFn: () => import('./__rootIndex__.203b0847.js'),
     staticData: {"sort":0,"sourceType":"md"},
     theme: theme5,
 };
 pages["/404"] = {
-    _importFn: () => import('./404.3475fc13.js'),
+    _importFn: () => import('./404.4e806017.js'),
     staticData: {"sourceType":"js"},
     theme: theme5,
 };
 pages["/magic-import"] = {
-    _importFn: () => import('./magic-import.78fcfb6f.js'),
+    _importFn: () => import('./magic-import.e338640c.js'),
     staticData: {"sort":4,"sourceType":"md"},
     theme: theme5,
 };
 pages["/page-data"] = {
-    _importFn: () => import('./page-data.04cf7c0e.js'),
+    _importFn: () => import('./page-data.c7ea4355.js'),
     staticData: {"sort":3,"sourceType":"md"},
     theme: theme5,
 };
 pages["/pages"] = {
-    _importFn: () => import('./pages.c403e89e.js'),
+    _importFn: () => import('./pages.d1be1790.js'),
     staticData: {"sort":1,"sourceType":"md"},
     theme: theme5,
 };
 pages["/theme"] = {
-    _importFn: () => import('./theme.c7c1c272.js'),
+    _importFn: () => import('./theme.7a587213.js'),
     staticData: {"sort":2,"sourceType":"md"},
     theme: theme5,
 };
