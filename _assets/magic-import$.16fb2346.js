@@ -1,5 +1,4 @@
-import './clientRender.951e5cb6.js';
-import { c as createElement } from './esm.083eca02.js';
+let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement } from './clientRender.c35fda0c.js';
 
 const layoutProps = {};
 const MDXLayout = "wrapper";
@@ -12,7 +11,13 @@ function MDXContent({
     ...props,
     components,
     mdxType: "MDXLayout"
-  }, /* @__PURE__ */ createElement("h1", null, `Magic import`), /* @__PURE__ */ createElement("p", null, `vite-pages support a special import format that can help you do powerful things.`), /* @__PURE__ */ createElement("h2", null, `Analyze source code`), /* @__PURE__ */ createElement("p", null, `When you are documenting for some JavaScript/Typescript library, you normally want to show some js/ts code to readers. This magic import help you load source code from a module. It is kind of like `, /* @__PURE__ */ createElement("a", {
+  }, /* @__PURE__ */ createElement("h1", null, `Magic import`), /* @__PURE__ */ createElement("p", null, `Vite-pages support "magic import". Magic import is `, /* @__PURE__ */ createElement("strong", {
+    parentName: "p"
+  }, `normal esModule import sytax`), ` with `, /* @__PURE__ */ createElement("strong", {
+    parentName: "p"
+  }, `tailored path convention`), `. It enable users to import things with special behavior. Users can use it to do powerful things.`), /* @__PURE__ */ createElement("blockquote", null, /* @__PURE__ */ createElement("p", {
+    parentName: "blockquote"
+  }, `If you are familiar with webpack loader mechanism, you can easily understand how magic import works.`)), /* @__PURE__ */ createElement("h2", null, `Analyze source code`), /* @__PURE__ */ createElement("p", null, `When you are documenting for some JavaScript/Typescript library, you normally want to show some js/ts code to readers. This magic import help you load source code from a module. It is kind of like `, /* @__PURE__ */ createElement("a", {
     parentName: "p",
     ...{
       href: "https://webpack.js.org/loaders/raw-loader/"
@@ -53,7 +58,7 @@ function MDXContent({
     ...{
       href: "https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/analyze-source-code/pages/index$.tsx"
     }
-  }, `analyze-source-code fixture`), `.`), /* @__PURE__ */ createElement("h3", null, `Relative module dependencies`), /* @__PURE__ */ createElement("p", null, `Relative module dependencies(.e.g `, /* @__PURE__ */ createElement("inlineCode", {
+  }, `analyze-source-code fixture`), ` for an example.`), /* @__PURE__ */ createElement("h3", null, `Relative module dependencies`), /* @__PURE__ */ createElement("p", null, `Relative module dependencies(.e.g `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
   }, `import util from './dir/util.ts'`), `) will also be collected into the analyze result, as shown by the previous example.`), /* @__PURE__ */ createElement("p", null, `Relative module import can be:`), /* @__PURE__ */ createElement("ul", null, /* @__PURE__ */ createElement("li", {
     parentName: "ul"
@@ -95,13 +100,13 @@ function MDXContent({
     parentName: "ul"
   }, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "li"
-  }, `demoDependencies`))));
+  }, `demoDependencies`))), /* @__PURE__ */ createElement("h2", null, `More magic imports?`), /* @__PURE__ */ createElement("p", null, `If you come up with more useful magic imports, `, /* @__PURE__ */ createElement("a", {
+    parentName: "p",
+    ...{
+      href: "https://github.com/vitejs/vite-plugin-react-pages/issues"
+    }
+  }, `feel free to open an issue or PR`), `. Contributions are always welcomed!`));
 }
 MDXContent.isMDXComponent = true;
 
-var magicImport$ = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  'default': MDXContent
-});
-
-export { magicImport$ as pageData };
+export default MDXContent;

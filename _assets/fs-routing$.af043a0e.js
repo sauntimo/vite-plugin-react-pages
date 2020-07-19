@@ -1,5 +1,4 @@
-import './clientRender.951e5cb6.js';
-import { c as createElement } from './esm.083eca02.js';
+let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement, L as Link } from './clientRender.c35fda0c.js';
 
 const layoutProps = {};
 const MDXLayout = "wrapper";
@@ -12,15 +11,17 @@ function MDXContent({
     ...props,
     components,
     mdxType: "MDXLayout"
-  }, /* @__PURE__ */ createElement("h1", null, `Pages`), /* @__PURE__ */ createElement("p", null, `vite-pages use filesystem based routing. You can create a page by simply creating a file: `, /* @__PURE__ */ createElement("inlineCode", {
+  }, /* @__PURE__ */ createElement("h1", null, `Filesystem Routing`), /* @__PURE__ */ createElement("p", null, `Vite-pages generates page routes based on your project file structure (filesystem routing).`), /* @__PURE__ */ createElement("h2", null, `Basic Filesystem Routing Convention`), /* @__PURE__ */ createElement("p", null, `The basic filesystem routing convention is very intuitive. It works out of the box and doesn't need any config. It should satisfy most users' needs.`), /* @__PURE__ */ createElement("p", null, /* @__PURE__ */ createElement("strong", {
+    parentName: "p"
+  }, `You can create a page by simply creating a file`), `: `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
   }, `page-name$.tsx`), `. Notice the `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
   }, `$`), ` `, /* @__PURE__ */ createElement("strong", {
     parentName: "p"
-  }, `at the end of the filename`), `. vite-pages recognizes it and know it is a page file.`), /* @__PURE__ */ createElement("p", null, `If the filename is `, /* @__PURE__ */ createElement("inlineCode", {
+  }, `at the end of the filename`), `. Vite-pages recognizes it and know it is a page entry.`), /* @__PURE__ */ createElement("p", null, `If the filename is `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
-  }, `index$.tsx`), `, the page url path will be the path of the directory.`), /* @__PURE__ */ createElement("blockquote", null, /* @__PURE__ */ createElement("p", {
+  }, `index$.tsx`), `, the page route path will be the path of the directory. See examples below.`), /* @__PURE__ */ createElement("blockquote", null, /* @__PURE__ */ createElement("p", {
     parentName: "blockquote"
   }, `All file extensions `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
@@ -140,20 +141,16 @@ function MDXContent({
     }
   }, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "td"
-  }, `/dir-name/page-three`))))), /* @__PURE__ */ createElement("p", null, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "p"
-  }, `404$.tsx`), ` (whatever extension) is a special fallback page. It will be displayed when no other page matches the url. Checkout the `, /* @__PURE__ */ createElement("a", {
+  }, `/dir-name/page-three`))))), /* @__PURE__ */ createElement("p", null, `Theme can decide what to render when no page matches the url. Checkout `, /* @__PURE__ */ createElement(Link, {
+    to: "/theme",
+    mdxType: "Link"
+  }, `the theme doc`), `.`), /* @__PURE__ */ createElement("p", null, `Checkout `, /* @__PURE__ */ createElement("a", {
     parentName: "p",
     ...{
-      href: "https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/basic/pages/404%24.tsx"
+      href: "https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/basic/pages"
     }
-  }, `basic fixture`), `.`));
+  }, `the basic fixture`), ` for an example.`));
 }
 MDXContent.isMDXComponent = true;
 
-var pages$ = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  'default': MDXContent
-});
-
-export { pages$ as pageData };
+export default MDXContent;
