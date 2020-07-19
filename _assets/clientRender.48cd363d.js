@@ -2465,68 +2465,41 @@ function wrap(promise) {
 const pages = {};
 
 pages["/"] = {
-    _importFn: () => wrap(import('./$.7ed7cde0.js')),
+    _importFn: () => wrap(import('./$.3065f0a6.js')),
     staticData: {"title":"Introduction","sort":0,"sourceType":"md"}
 };
 
 pages["/404"] = {
-    _importFn: () => wrap(import('./404$.ef76c134.js')),
+    _importFn: () => wrap(import('./404$.7492297f.js')),
     staticData: {"sourceType":"js"}
 };
 
 pages["/advanced-fs-routing"] = {
-    _importFn: () => wrap(import('./advanced-fs-routing$.c207aada.js')),
+    _importFn: () => wrap(import('./advanced-fs-routing$.40e93568.js')),
     staticData: {"title":"Advanced FS Routing","sort":5,"sourceType":"md"}
 };
 
 pages["/fs-routing"] = {
-    _importFn: () => wrap(import('./fs-routing$.af043a0e.js')),
+    _importFn: () => wrap(import('./fs-routing$.12367e87.js')),
     staticData: {"title":"FS Routing","sort":1,"sourceType":"md"}
 };
 
 pages["/magic-import"] = {
-    _importFn: () => wrap(import('./magic-import$.16fb2346.js')),
+    _importFn: () => wrap(import('./magic-import$.bcd46ba0.js')),
     staticData: {"title":"Magic Import","sort":4,"sourceType":"md"}
 };
 
 pages["/page-data"] = {
-    _importFn: () => wrap(import('./page-data$.b907411d.js')),
+    _importFn: () => wrap(import('./page-data$.4dbb65e4.js')),
     staticData: {"title":"Page data","sort":3,"sourceType":"md"}
 };
 
 pages["/theme"] = {
-    _importFn: () => wrap(import('./theme$.a3afe184.js')),
+    _importFn: () => wrap(import('./theme$.cebdaf38.js')),
     staticData: {"title":"Theme","sort":2,"sourceType":"md"}
 };
 
-var s = {"topBar":"topBar_2cc3af24","logo":"logo_2cc3af24","navs":"navs_2cc3af24","navsList":"navsList_2cc3af24","navsListItem":"navsListItem_2cc3af24"};
-
-const TopBar = ({ topNavs, logo }) => {
-    return (React.createElement("div", { className: s.topBar },
-        React.createElement("div", { className: s.logo }, logo),
-        React.createElement("div", { className: s.navs },
-            React.createElement("ul", { className: s.navsList }, topNavs === null || topNavs === void 0 ? void 0 : topNavs.map((item, index) => {
-                let content;
-                if ('href' in item) {
-                    content = (React.createElement("a", { href: item.href, target: "_blank", className: s.navsListItem }, item.text));
-                }
-                else {
-                    content = (React.createElement(Link, { to: item.path, className: s.navsListItem }, item.text));
-                }
-                return React.createElement("li", { key: index }, content);
-            })))));
-};
-
-var s$1 = {"sideMenu":"sideMenu_35ebcd6a"};
-
-const SideMenu = ({ data }) => {
-    return (React.createElement("ul", { className: s$1.sideMenu }, data.map((item, index) => {
-        return (React.createElement("li", { key: index },
-            React.createElement(Link, { to: item.path }, item.text)));
-    })));
-};
-
-var s$2 = {"layout":"layout_eef6d5a0","body":"body_eef6d5a0","content":"content_eef6d5a0"};
+;
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -2696,6 +2669,37 @@ function createElement$1 (type, props) {
 
   return React.createElement.apply(null, args);
 }
+
+;
+
+var s = {"topBar":"style-module_topBar__3WEff","logo":"style-module_logo__16CxJ","navs":"style-module_navs__3mkCj","navsList":"style-module_navsList__1kcqL","navsListItem":"style-module_navsListItem__27xDP"};
+
+const TopBar = ({ topNavs, logo }) => {
+    return (React.createElement("div", { className: s.topBar },
+        React.createElement("div", { className: s.logo }, logo),
+        React.createElement("div", { className: s.navs },
+            React.createElement("ul", { className: s.navsList }, topNavs === null || topNavs === void 0 ? void 0 : topNavs.map((item, index) => {
+                let content;
+                if ('href' in item) {
+                    content = (React.createElement("a", { href: item.href, target: "_blank", className: s.navsListItem }, item.text));
+                }
+                else {
+                    content = (React.createElement(Link, { to: item.path, className: s.navsListItem }, item.text));
+                }
+                return React.createElement("li", { key: index }, content);
+            })))));
+};
+
+var s$1 = {"sideMenu":"style-module_sideMenu__i12Ug"};
+
+const SideMenu = ({ data }) => {
+    return (React.createElement("ul", { className: s$1.sideMenu }, data.map((item, index) => {
+        return (React.createElement("li", { key: index },
+            React.createElement(Link, { to: item.path }, item.text)));
+    })));
+};
+
+var s$2 = {"layout":"style-module_layout__3vPKW","body":"style-module_body__AAr1H","content":"style-module_content__2Czcn"};
 
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
@@ -5941,10 +5945,12 @@ var theme = {
   }]
 };
 
+var index_cjs = theme;
+
 var defaultProps = {
   // $FlowFixMe
   Prism: Prism,
-  theme: theme
+  theme: index_cjs
 };
 
 function _defineProperty$1(obj, key, value) {
@@ -6312,9 +6318,11 @@ var theme$1 = {
   }]
 };
 
+var index_cjs$1 = theme$1;
+
 const CodeBlock = ({ children = '', className = '' }) => {
     const language = className === null || className === void 0 ? void 0 : className.replace(/language-/, '');
-    return (React.createElement(Highlight, Object.assign({}, defaultProps, { theme: theme$1, code: children.trim(), language: language }), ({ className, style, tokens, getLineProps, getTokenProps }) => (React.createElement("pre", { className: className, style: style }, tokens.map((line, i) => (React.createElement("div", Object.assign({ key: i }, getLineProps({ line, key: i })), line.map((token, key) => (React.createElement("span", Object.assign({ key: key }, getTokenProps({ token, key }))))))))))));
+    return (React.createElement(Highlight, Object.assign({}, defaultProps, { theme: index_cjs$1, code: children.trim(), language: language }), ({ className, style, tokens, getLineProps, getTokenProps }) => (React.createElement("pre", { className: className, style: style }, tokens.map((line, i) => (React.createElement("div", Object.assign({ key: i }, getLineProps({ line, key: i })), line.map((token, key) => (React.createElement("span", Object.assign({ key: key }, getTokenProps({ token, key }))))))))))));
 };
 
 const components = {
@@ -6324,10 +6332,6 @@ const components = {
 const MDX = ({ children }) => {
     return React.createElement(MDXProvider, { components: components }, children);
 };
-
-;
-
-;
 
 const Layout = ({ sideMenuData, topNavs, logo, applyMdStyle, path, children, }) => {
     return (React.createElement("div", { className: s$2.layout },
@@ -6408,10 +6412,6 @@ function defaultMenu(pages) {
 
 var createTheme$1 = createTheme({
   topNavs: [
-    {
-      text: "🎮 Example",
-      href: "https://github.com/csr632/vite-pages-example"
-    },
     {
       text: "⭐ Github",
       href: "https://github.com/vitejs/vite-plugin-react-pages"

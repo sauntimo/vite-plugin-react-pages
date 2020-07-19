@@ -1,4 +1,4 @@
-let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement } from './clientRender.c35fda0c.js';
+let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement } from './clientRender.48cd363d.js';
 
 const layoutProps = {};
 const MDXLayout = "wrapper";

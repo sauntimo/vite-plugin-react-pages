@@ -1,4 +1,4 @@
-let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement, L as Link } from './clientRender.c35fda0c.js';
+let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement, L as Link } from './clientRender.48cd363d.js';
 
 const layoutProps = {};
 const MDXLayout = "wrapper";
@@ -76,12 +76,17 @@ function MDXContent({
     parentName: "li"
   }, `Support SSR out of the box`), `. By pre-rendering your app into HTML at buildtime, users can see the content before any JS is loaded.`)), /* @__PURE__ */ createElement("p", null, `In a nutshell, vite-pages is a React app framework that collects your pages data and passes them to your theme.`), /* @__PURE__ */ createElement("h2", null, `Getting stated`), /* @__PURE__ */ createElement("ol", null, /* @__PURE__ */ createElement("li", {
     parentName: "ol"
-  }, `clone `, /* @__PURE__ */ createElement("a", {
-    parentName: "li",
-    ...{
-      href: "https://github.com/csr632/vite-pages-example"
-    }
-  }, `this repo`)), /* @__PURE__ */ createElement("li", {
+  }, `initialize a vite-pages project:`, /* @__PURE__ */ createElement("ul", {
+    parentName: "li"
+  }, /* @__PURE__ */ createElement("li", {
+    parentName: "ul"
+  }, `use `, /* @__PURE__ */ createElement("inlineCode", {
+    parentName: "li"
+  }, `npm init @csr632/vite-app my-app --template react-pages-app`), ` to initialize an app starter, or`), /* @__PURE__ */ createElement("li", {
+    parentName: "ul"
+  }, `use `, /* @__PURE__ */ createElement("inlineCode", {
+    parentName: "li"
+  }, `npm init @csr632/vite-app my-lib --template react-pages-lib`), ` to initialize a library starter.`))), /* @__PURE__ */ createElement("li", {
     parentName: "ol"
   }, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "li"
@@ -93,15 +98,11 @@ function MDXContent({
     parentName: "ol"
   }, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "li"
-  }, `npm run build`), ` and serve the `, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "li"
-  }, `dist`), `.`), /* @__PURE__ */ createElement("li", {
+  }, `npm run build`), `.`), /* @__PURE__ */ createElement("li", {
     parentName: "ol"
   }, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "li"
-  }, `npm run ssr`), ` and serve the `, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "li"
-  }, `dist`), `. You can `, /* @__PURE__ */ createElement("a", {
+  }, `npm run ssr`), `. You can `, /* @__PURE__ */ createElement("a", {
     parentName: "li",
     ...{
       href: "https://developers.google.com/web/tools/chrome-devtools/javascript/disable"
