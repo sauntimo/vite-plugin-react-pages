@@ -1,5 +1,10 @@
-let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement, L as Link } from './clientRender.48cd363d.js';
-
+let __VITE_CSS__ = document.createElement("style");
+__VITE_CSS__.innerHTML = "";
+document.head.appendChild(__VITE_CSS__);
+import "./source.development.988405bf.js";
+import "./react-router.7eae1728.js";
+import {L as Link} from "./react-router-dom.c434f558.js";
+import {c as createElement} from "./esm.2198c540.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -110,5 +115,4 @@ function MDXContent({
   }, `disable javascript in your browser`), `, to verify if it can still render.`)));
 }
 MDXContent.isMDXComponent = true;
-
 export default MDXContent;

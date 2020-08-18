@@ -1,6 +1,11 @@
-let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement, L as Link } from './clientRender.48cd363d.js';
-import { M as MDXContent$1 } from './theme-interface.9593c16a.js';
-
+let __VITE_CSS__ = document.createElement("style");
+__VITE_CSS__.innerHTML = "";
+document.head.appendChild(__VITE_CSS__);
+import "./source.development.988405bf.js";
+import "./react-router.7eae1728.js";
+import {L as Link} from "./react-router-dom.c434f558.js";
+import {c as createElement} from "./esm.2198c540.js";
+import {M as MDXContent$1} from "./theme-interface.7b255cb0.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -115,5 +120,4 @@ tags:
   }, `This fixture`), ` demonstrate how to use it.`)));
 }
 MDXContent.isMDXComponent = true;
-
 export default MDXContent;

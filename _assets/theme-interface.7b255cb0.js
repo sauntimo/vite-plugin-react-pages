@@ -1,5 +1,5 @@
-import { c as createElement } from './clientRender.48cd363d.js';
-
+import "./source.development.988405bf.js";
+import {c as createElement} from "./esm.2198c540.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -75,5 +75,4 @@ interface ITheme {
 `)));
 }
 MDXContent.isMDXComponent = true;
-
-export { MDXContent as M };
+export {MDXContent as M};

@@ -1,5 +1,8 @@
-let __VITE_CSS__ = document.createElement('style');__VITE_CSS__.innerHTML = "";document.head.appendChild(__VITE_CSS__);import { c as createElement } from './clientRender.48cd363d.js';
-
+let __VITE_CSS__ = document.createElement("style");
+__VITE_CSS__.innerHTML = "";
+document.head.appendChild(__VITE_CSS__);
+import "./source.development.988405bf.js";
+import {c as createElement} from "./esm.2198c540.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -108,5 +111,4 @@ function MDXContent({
   }, `feel free to open an issue or PR`), `. Contributions are always welcomed!`));
 }
 MDXContent.isMDXComponent = true;
-
 export default MDXContent;
