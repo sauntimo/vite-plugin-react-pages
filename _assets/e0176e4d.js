@@ -1,8 +1,7 @@
 let __VITE_CSS__ = document.createElement("style");
 __VITE_CSS__.innerHTML = "";
 document.head.appendChild(__VITE_CSS__);
-import "./source.development.988405bf.js";
-import {c as createElement} from "./esm.2198c540.js";
+import {c as createElement} from "./d2371593.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -20,7 +19,7 @@ function MDXContent({
     parentName: "p"
   }, `tailored path convention`), `. It enable users to import things with special behavior. Users can use it to do powerful things.`), /* @__PURE__ */ createElement("blockquote", null, /* @__PURE__ */ createElement("p", {
     parentName: "blockquote"
-  }, `If you are familiar with webpack loader mechanism, you can easily understand how magic import works.`)), /* @__PURE__ */ createElement("h2", null, `Analyze source code`), /* @__PURE__ */ createElement("p", null, `When you are documenting for some JavaScript/Typescript library, you normally want to show some js/ts code to readers. This magic import help you load source code from a module. It is kind of like `, /* @__PURE__ */ createElement("a", {
+  }, `If you are familiar with the webpack loader mechanism, you can easily guess how magic import works.`)), /* @__PURE__ */ createElement("h2", null, `Analyze source code`), /* @__PURE__ */ createElement("p", null, `When you are documenting for some JavaScript/Typescript library, you normally want to show some js/ts code to readers. This magic import help you load source code from a module. It is kind of like `, /* @__PURE__ */ createElement("a", {
     parentName: "p",
     ...{
       href: "https://webpack.js.org/loaders/raw-loader/"
@@ -42,13 +41,13 @@ function MDXContent({
   "entry": "demo1.tsx",
   "modules": {
     "dir/util.ts": {
-      "code": "export default (txt: string) => {\\n  console.log('util:' + txt)\\n}\\n"
+      "code": "the source code of dir/util.ts..."
     },
     "demo1.module.css": {
-      "code": ".box {\\n  border: 1px solid black;\\n  padding: 16px;\\n}\\n\\n.title {\\n  margin-top: 0;\\n  margin-bottom: 8px;\\n  color: blue;\\n}\\n"
+      "code": "the source code of demo1.module.css..."
     },
     "demo1.tsx": {
-      "code": "import React, { useState, useEffect, useCallback } from 'react'\\n// This is an external library used by demo\\nimport { Button } from 'antd'\\nimport 'antd/dist/antd.css'\\n\\nimport util from './dir/util'\\nimport style from './demo1.module.css'\\n\\ninterface IProps {}\\n\\nconst Demo1: React.FC<IProps> = (props) => {\\n  useEffect(() => {\\n    util('demo1')\\n  }, [])\\n\\n  return (\\n    <div className={style.box}>\\n      <h1 className={style.title}>This demo use a library</h1>\\n      <Button type=\\"primary\\">Primary Button</Button>\\n    </div>\\n  )\\n}\\n\\nexport default Demo1\\n"
+      "code": "the source code of demo1.tsx..."
     }
   },
   "externals": {
@@ -61,29 +60,15 @@ function MDXContent({
     ...{
       href: "https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/analyze-source-code/pages/index$.tsx"
     }
-  }, `analyze-source-code fixture`), ` for an example.`), /* @__PURE__ */ createElement("h3", null, `Relative module dependencies`), /* @__PURE__ */ createElement("p", null, `Relative module dependencies(.e.g `, /* @__PURE__ */ createElement("inlineCode", {
+  }, `analyze-source-code fixture`), ` for an example.`), /* @__PURE__ */ createElement("h3", null, `Relative module dependencies`), /* @__PURE__ */ createElement("p", null, `For relative module dependencies(.e.g `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
-  }, `import util from './dir/util.ts'`), `) will also be collected into the analyze result, as shown by the previous example.`), /* @__PURE__ */ createElement("p", null, `Relative module import can be:`), /* @__PURE__ */ createElement("ul", null, /* @__PURE__ */ createElement("li", {
-    parentName: "ul"
-  }, `js, jsx, ts, tsx`), /* @__PURE__ */ createElement("li", {
-    parentName: "ul"
-  }, `css`), /* @__PURE__ */ createElement("li", {
-    parentName: "ul"
-  }, `Sass. You need to install `, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "li"
-  }, `node-sass`)), /* @__PURE__ */ createElement("li", {
-    parentName: "ul"
-  }, `Stylus. You need to install `, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "li"
-  }, `stylus`)), /* @__PURE__ */ createElement("li", {
-    parentName: "ul"
-  }, `Less. You need to install `, /* @__PURE__ */ createElement("inlineCode", {
-    parentName: "li"
-  }, `less`))), /* @__PURE__ */ createElement("h3", null, `External module dependencies`), /* @__PURE__ */ createElement("p", null, `For those dependencies from `, /* @__PURE__ */ createElement("inlineCode", {
+  }, `import util from './dir/util.ts'`), `), their source code will be collected into the analyze result, as shown by the previous example.`), /* @__PURE__ */ createElement("p", null, `Relative module import can be js, jsx, ts, tsx, css, sass, etc.`), /* @__PURE__ */ createElement("h3", null, `External module dependencies`), /* @__PURE__ */ createElement("p", null, `For those dependencies from `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
   }, `node_modules`), ` (.e.g `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
-  }, `import React from 'react'`), `), this magic import will not load source code for them. Instead, the dependencies' versions are recorded, as shown by the previous example.`), /* @__PURE__ */ createElement("p", null, `This magic import gets dependencies' versions by find `, /* @__PURE__ */ createElement("inlineCode", {
+  }, `import React from 'react'`), `), this magic import will `, /* @__PURE__ */ createElement("strong", {
+    parentName: "p"
+  }, `not`), ` load source code for them. Instead, the dependencies' versions are recorded, as shown by the previous example.`), /* @__PURE__ */ createElement("p", null, `This magic import gets dependencies' versions by find `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
   }, `package.json`), ` up from the importer, and find the package version from these `, /* @__PURE__ */ createElement("inlineCode", {
     parentName: "p"
@@ -111,4 +96,10 @@ function MDXContent({
   }, `feel free to open an issue or PR`), `. Contributions are always welcomed!`));
 }
 MDXContent.isMDXComponent = true;
-export default MDXContent;
+var m0 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: MDXContent
+});
+const modules = {};
+modules["main"] = m0;
+export default modules;

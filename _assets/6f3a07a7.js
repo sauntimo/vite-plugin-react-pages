@@ -1,10 +1,7 @@
 let __VITE_CSS__ = document.createElement("style");
 __VITE_CSS__.innerHTML = "";
 document.head.appendChild(__VITE_CSS__);
-import "./source.development.988405bf.js";
-import "./react-router.7eae1728.js";
-import {L as Link} from "./react-router-dom.c434f558.js";
-import {c as createElement} from "./esm.2198c540.js";
+import {c as createElement, L as Link} from "./d2371593.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -154,7 +151,18 @@ function MDXContent({
     ...{
       href: "https://github.com/vitejs/vite-plugin-react-pages/blob/master/fixtures/basic/pages"
     }
-  }, `the basic fixture`), ` for an example.`));
+  }, `the basic fixture`), ` for an example.`), /* @__PURE__ */ createElement("h2", null, `Advanced Filesystem Routing`), /* @__PURE__ */ createElement("p", null, `The "Basic Filesystem Routing Convention" should satisfy most users' needs. For advanced users, vite-pages let you implement your own filesystem routing convention: you can `, /* @__PURE__ */ createElement("strong", {
+    parentName: "p"
+  }, `teach vite-pages how to collect pages from your project`), `. Checkout `, /* @__PURE__ */ createElement(Link, {
+    to: "/advanced-fs-routing",
+    mdxType: "Link"
+  }, `advanced fs routing`), `.`));
 }
 MDXContent.isMDXComponent = true;
-export default MDXContent;
+var m0 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: MDXContent
+});
+const modules = {};
+modules["main"] = m0;
+export default modules;

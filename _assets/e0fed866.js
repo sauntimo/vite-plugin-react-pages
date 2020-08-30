@@ -1,10 +1,7 @@
 let __VITE_CSS__ = document.createElement("style");
 __VITE_CSS__.innerHTML = "";
 document.head.appendChild(__VITE_CSS__);
-import "./source.development.988405bf.js";
-import "./react-router.7eae1728.js";
-import {L as Link} from "./react-router-dom.c434f558.js";
-import {c as createElement} from "./esm.2198c540.js";
+import {c as createElement, L as Link} from "./d2371593.js";
 const layoutProps = {};
 const MDXLayout = "wrapper";
 function MDXContent({
@@ -21,7 +18,7 @@ function MDXContent({
     ...{
       href: "https://github.com/vitejs/vite-plugin-react-pages"
     }
-  }, `vite-plugin-react-page`), ` (let's call it "vite-pages") is a React app framework powered by `, /* @__PURE__ */ createElement("a", {
+  }, `vite-plugin-react-page`), ` (vite-pages) is a React app framework powered by `, /* @__PURE__ */ createElement("a", {
     parentName: "p",
     ...{
       href: "https://github.com/vitejs/vite"
@@ -30,16 +27,16 @@ function MDXContent({
     parentName: "ul"
   }, `blog site`), /* @__PURE__ */ createElement("li", {
     parentName: "ul"
-  }, `documentation site for your library`), /* @__PURE__ */ createElement("li", {
+  }, `documentation site for your library or product`), /* @__PURE__ */ createElement("li", {
     parentName: "ul"
   }, `stories(demos) development for your React components(like `, /* @__PURE__ */ createElement("a", {
     parentName: "li",
     ...{
       href: "https://storybook.js.org/"
     }
-  }, `storybook`), `)`)), /* @__PURE__ */ createElement("p", null, `It has many features that help developers `, /* @__PURE__ */ createElement("strong", {
+  }, `storybook`), `)`)), /* @__PURE__ */ createElement("p", null, `It provides many features that help developers `, /* @__PURE__ */ createElement("strong", {
     parentName: "p"
-  }, `build an React App quickly`), `:`), /* @__PURE__ */ createElement("ul", null, /* @__PURE__ */ createElement("li", {
+  }, `build a React App quickly`), `:`), /* @__PURE__ */ createElement("ul", null, /* @__PURE__ */ createElement("li", {
     parentName: "ul"
   }, /* @__PURE__ */ createElement("strong", {
     parentName: "li"
@@ -50,14 +47,14 @@ function MDXContent({
   }, `Filesystem based routing`), `. By following a `, /* @__PURE__ */ createElement(Link, {
     to: "/fs-routing",
     mdxType: "Link"
-  }, `simple filesystem routing convention`), `, It is easy to create, locate and develop pages. You don't need to worry about routing configuration. For `, /* @__PURE__ */ createElement(Link, {
+  }, `simple filesystem routing convention`), `, It is easy to create, locate and develop pages. You don't need to worry about routing configuration. For advanced users, you can `, /* @__PURE__ */ createElement(Link, {
     to: "/advanced-fs-routing",
     mdxType: "Link"
-  }, `advanced users`), `, you can tell vite-pages how to find page files, so that vite-pages can work with any project file structure.`), /* @__PURE__ */ createElement("li", {
+  }, `tell vite-pages how to find page files`), `, so that vite-pages can work with any project file structure.`), /* @__PURE__ */ createElement("li", {
     parentName: "ul"
   }, /* @__PURE__ */ createElement("strong", {
     parentName: "li"
-  }, `Support Mdx`), `. You can write content with both "normal React" or `, /* @__PURE__ */ createElement("a", {
+  }, `Support Mdx`), `. You can write content with either "normal React" or `, /* @__PURE__ */ createElement("a", {
     parentName: "li",
     ...{
       href: "https://mdxjs.com/"
@@ -79,7 +76,7 @@ function MDXContent({
     parentName: "ul"
   }, /* @__PURE__ */ createElement("strong", {
     parentName: "li"
-  }, `Support SSR out of the box`), `. By pre-rendering your app into HTML at buildtime, users can see the content before any JS is loaded.`)), /* @__PURE__ */ createElement("p", null, `In a nutshell, vite-pages is a React app framework that collects your pages data and passes them to your theme.`), /* @__PURE__ */ createElement("h2", null, `Getting stated`), /* @__PURE__ */ createElement("ol", null, /* @__PURE__ */ createElement("li", {
+  }, `Support SSR out of the box`), `. By pre-rendering your app into HTML at buildtime, users can see the content before any JS is loaded.`)), /* @__PURE__ */ createElement("h2", null, `Getting stated`), /* @__PURE__ */ createElement("ol", null, /* @__PURE__ */ createElement("li", {
     parentName: "ol"
   }, `initialize a vite-pages project:`, /* @__PURE__ */ createElement("ul", {
     parentName: "li"
@@ -115,4 +112,10 @@ function MDXContent({
   }, `disable javascript in your browser`), `, to verify if it can still render.`)));
 }
 MDXContent.isMDXComponent = true;
-export default MDXContent;
+var m0 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: MDXContent
+});
+const modules = {};
+modules["main"] = m0;
+export default modules;
